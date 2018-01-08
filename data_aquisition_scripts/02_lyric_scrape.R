@@ -150,7 +150,7 @@ allthesongs %>%
   inner_join(binded, by = c('Song', 'Artist')) %>% 
   select(Song, Artist, spotifyID = spotifyID.x, Lyrics = Lyrics.y, Source = Source.y) -> new_lyrics
 
-new_lyrics %>% count()
+# new_lyrics %>% count()
 
-new_lyrics %>%  write_csv('data/lyrics.csv')
+new_lyrics %>%  write_csv('data/working_lyrics.csv')
 
