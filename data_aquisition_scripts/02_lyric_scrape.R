@@ -111,6 +111,7 @@ allthesongs$Lyrics <- gsub("we are not in a position to display these lyrics
 # 2 remove duplicates from the script
 # 3 create new lyrics csv to continue running the script
 
+
 lyrics_df <- read_csv('data/lyrics_first_pass.csv')
 
 # ID last completed song
@@ -146,11 +147,12 @@ binded <- has_lyrics_df %>%
   anti_join(not_pulled_df, by = c('Song', 'Artist'))
 
 # reorder to match original & write CSV
+
 allthesongs %>% 
   inner_join(binded, by = c('Song', 'Artist')) %>% 
   select(Song, Artist, spotifyID = spotifyID.x, Lyrics = Lyrics.y, Source = Source.y) -> new_lyrics
 
 # new_lyrics %>% count()
-
-new_lyrics %>%  write_csv('data/working_lyrics.csv')
+new_lyrics %>%  write_csv('data/lyrics.csv')
+new_lyrics %>%  write_csv('data/working_lyrics2.csv')
 
