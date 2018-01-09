@@ -13,13 +13,16 @@ access_token <- spotifyr::get_spotify_access_token()
 df <- read_csv('data/all_charts.csv') %>% 
   rename(track_uri = spotifyID)
 
-spotify_pull <- spotifyr::get_track_audio_features(df) %>% 
-  write_csv('data/spotify_data.csv')
+# spotify_pull <- spotifyr::get_track_audio_features(df) %>% 
+#   write_csv('data/spotify_data.csv')
 
 
+artist_df <- df %>% 
+  select()
 
+check <- spotifyr::get_artist_audio_features('radiohead')
 
-
+check %>% glimpse()
 # df %>% 
 #   left_join(spotify_pull) %>% 
 #   select(track_uri, danceability) %>% 
