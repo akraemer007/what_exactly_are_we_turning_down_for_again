@@ -1,5 +1,8 @@
 # What Exactly Are We Turning Down for Again?
 
+[TextBlob Polarity](http://planspace.org/20150607-textblob_sentiment/)
+[Downer Index](https://caitlinhudon.com/2017/12/22/blue-christmas/)
+
 ## Summary
 
 Music is part of our daily lives. We listen to it when we work out. We listen to it when we're sad. This project attempts to predict what type of popular music is listened to based on external factors. For instance, if the stock market is up, are the top Billboard hits happy songs? Conversely, if the stock market is down, do people stay indoors and listen to The Cure and Morrissey on repeat?
