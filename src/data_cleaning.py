@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from textblob import TextBlob
+from sklearn.metrics.pairwise import euclidean_distances
 
 def import_clean_chart_data(file, keep_top_10 = True):
     chart_df = pd.read_csv('../data/all_charts.csv')
@@ -51,6 +52,13 @@ def import_clean_lyrics_data(file):
 def join_data(chart_df, spotify_df, lyrics_df):
     df = pd.merge(chart_df, spotify_df, left_on='spotifyID', right_on = 'track_uri', how='inner')
     df = pd.merge(df, lyrics_df, left_on='spotifyID', right_on = 'spotifyID', how='inner')
+
+    # create variables
+    coord = df['coord'] = [[df['valence'].iloc[i], df['energy'].iloc[i]] for i in range(df.shape[0])]
+    df['euclidean_dist'] = euclidean_distances(coord, [[0, 0]])
+
+    df['euc_dist_normed'] = df['euclidean_dist'] / (2 ** (1 / 2))  # euclidian dist between (0,0) & (1,1)
+    df['happy_index'] = (df['euc_dist_normed'] + df['polarity']) / 2
     return df
 
 # ### MARKET DATA DATA ###
