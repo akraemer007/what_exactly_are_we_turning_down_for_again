@@ -64,7 +64,9 @@ def join_data(chart_df, spotify_df, lyrics_df):
 # ### MARKET DATA DATA ###
 
 def group_data_by_month(df):
-    return df.groupby(['year', 'month', 'decade'])[['happy_index', 'valence', 'energy', 'polarity']].mean().reset_index()
+    df_month = df.groupby(['year', 'month', 'decade'])[['happy_index', 'valence', 'energy', 'polarity']].mean().reset_index()
+    df_month['dates'] = [pd.to_datetime(str(a) + str(b) + str(c), format='%m%d%Y') for a, b, c in zip(df_month.month, np.ones(df_month.shape[0]).astype(int), df_month.year)]
+    return df_month
 
 # ### IMPORT SNP ###
 
@@ -112,6 +114,8 @@ def main():
     snp_month_df = import_clean_snp_data('../data/daily_snp500.csv')
     cci_df = import_clean_cci_data('../data/cci.csv')
     df_month = merge_all_data(df_month, snp_month_df, cci_df)
-    # print(chart_df.shape[0], spotify_df.shape[0], lyrics_df.shape[0])
+
+    df_month.to_pickle('../data/merged_df.pkl')
+
 if __name__ == '__main__':
     main()
