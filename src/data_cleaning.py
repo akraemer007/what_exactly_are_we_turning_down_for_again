@@ -59,6 +59,7 @@ def join_data(chart_df, spotify_df, lyrics_df):
 
     df['euc_dist_normed'] = df['euclidean_dist'] / (2 ** (1 / 2))  # euclidian dist between (0,0) & (1,1)
     df['happy_index'] = (df['euc_dist_normed'] + df['polarity']) / 2
+    df['happy_flag'] = np.where(df['happy_index'] > .5, 1, 0)
     return df
 
 # ### MARKET DATA DATA ###
