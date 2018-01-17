@@ -17,6 +17,7 @@ data['chartDate'] = data['chartDate'].apply(lambda x: x.strftime('%Y-%m-%d'))
 # data['energy'] = data['energy'].apply(lambda x: round(x, 2))
 # data['polarity'] = data['polarity'].apply(lambda x: round(x, 2))
 
+
 source = ColumnDataSource(data = dict(title=[],
                                       chartDate=[],
                                       peakPos=[],
@@ -27,13 +28,10 @@ source = ColumnDataSource(data = dict(title=[],
                                       color=[]))
 
 # set up widgets
-# stats = PreText(text='', width=500)
-# ticker1 = Select(value='AAPL', options=nix('GOOG', DEFAULT_TICKERS))
-# ticker2 = Select(value='GOOG', options=nix('AAPL', DEFAULT_TICKERS))
 min_year = Slider(title="Year released", start=1958, end=2016, value=1970, step=1)
 max_year = Slider(title="End Year released", start=1958, end=2016, value=2016, step=1)
 pos_slider = Slider(title="Peak Position Max", start= 1, end = 10, value = 10, step=1)
-
+# happy_filter = Slider(title="Peak Position Max", start= 1, end = 10, value = 10, step=1)
 
 hover = HoverTool(tooltips=[
     ("Title", "@title"),
@@ -51,10 +49,12 @@ corr = figure(plot_width=450, plot_height=450,
               tools=[hover],
               title = 'dope title',
               x_range = [0,1], y_range = [0,1])
+
 corr.circle(x = 'valence', y = 'energy',
             size=7,
             source=source,
-            color="color", alpha=0.3, nonselection_alpha=0.3, selection_alpha=0.7)
+            color="color",
+            alpha=0.3, nonselection_alpha=0.3, selection_alpha=0.7)
 corr.xaxis.axis_label = 'Valence'
 corr.yaxis.axis_label = 'Energy'
 
@@ -67,8 +67,8 @@ def select_data():
 
     selected = data[
         (data.year >= min_year.value) &
-        (data.year <= max_year.value) #&
-        # (data.peakPos <= )
+        (data.year <= max_year.value) &
+        (data.peakPos <= pos_slider.value)
     ]
 
     return selected
@@ -90,7 +90,7 @@ def update(selected=None):
                                      'color']])
 
 
-controls = [min_year, max_year]
+controls = [min_year, max_year, pos_slider]
 for control in controls:
     control.on_change('value', lambda attr, old, new: update())
 
