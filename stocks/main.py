@@ -27,6 +27,11 @@ month_data = pd.read_pickle('../data/month_df.pkl')
 month_data = month_data.reset_index()
 
 
+####### DROPDOWN
+AXIS = ['valence', 'energy', 'polarity', 'happy_index']
+# def nix(val, lst):
+#     return [x for x in lst if x != val]
+
 # instantiate scatter plot
 source = ColumnDataSource(data = dict(title=[],
                                       chartDate=[],
@@ -46,11 +51,14 @@ source_static.data = source_static.from_df(month_data[['dates',
 
 
 
-# set up widgets
+####### WIGIT INITIATION
 min_year = Slider(title="Year released", start=1958, end=2016, value=1970, step=1)
 max_year = Slider(title="End Year released", start=1958, end=2016, value=2016, step=1)
 pos_slider = Slider(title="Peak Position Max", start= 1, end = 10, value = 10, step=1)
-# happy_filter = Slider(title="Peak Position Max", start= 1, end = 10, value = 10, step=1)
+x_axis = Select(title="x_axis", value='valence', options=AXIS)
+y_axis = Select(title="y_axis", value='energy', options=AXIS)
+title = TextInput(title="Song name :")
+artist = TextInput(title="Artist name contains:")
 
 hover = HoverTool(tooltips=[
     ("Title", "@title"),
@@ -69,11 +77,11 @@ corr = figure(plot_width=550, plot_height=550,
               title = 'dope title',
               x_range = [0,1], y_range = [0,1])
 
-corr.circle(x = 'valence', y = 'energy',
+corr.circle(x = 'x_axis', y = 'y_axis',
             size=7,
             source=source,
             color="color",
-            alpha=0.3, nonselection_alpha=0.3, selection_alpha=0.7)
+            alpha=0.3, nonselection_alpha=0.3, selection_color="blue", selection_alpha=0.7)
 corr.xaxis.axis_label = 'Valence'
 corr.yaxis.axis_label = 'Energy'
 
@@ -84,33 +92,33 @@ ts1.vbar(x=month_data['dates'], width=1, bottom=95, top=105, line_width=2, line_
 ts1.xaxis.axis_label = 'Date'
 ts1.yaxis.axis_label = 'Consumer Confidence Index'
 
-# ts1.background_fill_color = "black"
-# ts1.xgrid.grid_line_color = None
-# ts1.ygrid.grid_line_color = None
-
-
-# ts2 = figure(plot_width=900, plot_height=200, tools=tools, x_axis_type='datetime', active_drag="xbox_select")
-# ts2.line('dates', 'sad_hit_flag', fill= 'blue', source=source_static)
 
 
 
+####### CREATE VERTICAL LINE LABELS
+# TODO add labels
 def create_vline(year_month_day):
     start_date = time.mktime(dt(year_month_day[0], year_month_day[1], year_month_day[2], 0, 0, 0).timetuple())*1000
     vertical_line1 = Span(location=start_date, dimension='height', line_color='blue',line_dash='dashed', line_width=1)
-    vertical_line2 = Span(location=start_date, dimension='height', line_color='blue',line_dash='dashed', line_width=1)
     ts1.add_layout(vertical_line1)
-    # ts2.add_layout(vertical_line2)
+[create_vline(date) for date in [(1963,10,2, 'JFK Assassination'), (2001,9,1, '9/11'), (2008,9,15, "'08 Stock Crash")]]
 
-[create_vline(date) for date in [(1963,10,2), (2001,9,1), (2008,9,15)]]
-
-
-# HTML header
+####### HTML HEADER
 desc = Div(text=open(join(dirname(__file__), "description.html")).read(), width=800)
 
+###### Dropdown update
+# def x_axis_change(attrname, old, new):
+#     x_axis.options = nix(new, AXIS)
+#     update()
+#
+# def y_axis_change(attrname, old, new):
+#     y_axis.options = nix(new, AXIS)
+#     update()
 
-
-
+###### DATA FILTERING
 def select_data():
+    title_val = title.value.strip()
+    artist_val = artist.value.strip()
 
     selected_song = song_data[
         (song_data.year >= min_year.value) &
@@ -118,14 +126,21 @@ def select_data():
         (song_data.peakPos <= pos_slider.value)
     ]
 
+    # filter text boxes
+    if (title_val != ""):
+        selected_song = selected_song[selected_song.title.str.contains(title_val)==True]
+    if (artist_val != ""):
+        selected_song = selected_song[selected_song.artist.str.contains(artist_val) == True]
+
+    selected_song['x_axis'] = selected_song[x_axis.value]
+    selected_song['y_axis'] = selected_song[y_axis.value]
+
+
     selected_month = month_data#[]
 
     return selected_song, selected_month
 
-# def update_happiest_saddest():
-#
-#     return
-
+####### UPDATING
 def update(selected=None):
     song_df, month_df = select_data()
     source.data = source.from_df(song_df[['title',
@@ -136,13 +151,17 @@ def update(selected=None):
                                           'energy',
                                           'polarity',
                                           'happy_index',
-                                          'color']])
+                                          'color',
+                                          'x_axis',
+                                          'y_axis']])
+    corr.xaxis.axis_label = x_axis.value
+    corr.yaxis.axis_label = y_axis.value
+
     source_static.data = source_static.from_df(month_df[['dates',
                                                          'cci_value',
                                                          'sad_hit_flag']])
 
-
-controls = [min_year, max_year, pos_slider]
+controls = [x_axis, y_axis, min_year, max_year, pos_slider, title, artist]
 for control in controls:
     control.on_change('value', lambda attr, old, new: update())
 
@@ -150,7 +169,8 @@ sizing_mode = 'fixed'  # 'scale_width' also looks nice with this example
 
 inputs = widgetbox(*controls, sizing_mode=sizing_mode)
 
-# layout = column(main_row, series)
+
+####### LAYOUT
 layout = layout([desc, [corr, inputs], ts1])
 
 # initialize
