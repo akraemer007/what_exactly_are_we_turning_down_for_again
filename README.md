@@ -29,12 +29,12 @@ A successful score could also be used to aid in the marketing efforts of large m
 
 ## Data:
 
-| Source                                                                                    | Description                                                | Format                               | Data Acquired |
-|-------------------------------------------------------------------------------------------|------------------------------------------------------------|--------------------------------------|--------------|
-| [Million Song Dataset](https://labrosa.ee.columbia.edu/millionsong/pages/getting-dataset) | Large, detailed dataset of one million songs.              | SQLite DB (summary), HDF5 (detailed) | [Yes](https://github.com/akraemer007/million_song/blob/master/support_files/data_snapshots/msd_data.png)          |
-| [MusixMatch Lyrics](https://labrosa.ee.columbia.edu/millionsong/musixmatch)               | Lyrics of 237,622 songs which map to MSD dataset           | SQLite DB (bag of words)             | [Yes](https://github.com/akraemer007/million_song/blob/master/support_files/data_snapshots/lyric_data.png)          |
-| [Billboard](http://www.umdmusic.com/default.asp?Lang=English&Chart=D)                     | Billboard Top 20 List going back to 1949                   | CSV                                  | [Yes](https://github.com/akraemer007/million_song/blob/master/support_files/data_snapshots/billboard_data.png)          |
-| [S&P 500](https://finance.yahoo.com/quote/%5EGSPC/history?p=%5EGSPC)                      | Weekly market highs and lows of S&P 500 going back to 1950 | CSV                                  | [Yes](https://github.com/akraemer007/million_song/blob/master/support_files/data_snapshots/snp500_data.png)          |
+| Source                                                                                                    | Description                               | Format                                                                        |
+|-----------------------------------------------------------------------------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------|
+| [Billboard](https://github.com/dbfowler/billboard_volatility/blob/master/Raw%20Data/all_charts.csv)       | Billboard Top 100 List going back to 1958 | CSV                                                                           |
+| [Consumer Confidence Index](https://data.oecd.org/leadind/consumer-confidence-index-cci.htm)              | Monthly Index value going back to 1960    | CSV                                                                           |
+| [Spotify API](https://developer.spotify.com/web-api/)                                                     | Song valence and energy scores            | [API](https://github.com/charlie86/spotifyr)                                  |
+| [MetroLyrics](www.metrolyrics.com/), [songlyrics](www.songlyrics.com/), [lyricsmode](www.lyricsmode.com/) | Lyrics billboard hits                     | [Scraped](https://github.com/walkerkq/musiclyrics/blob/master/01_songscrape.R)|
 
 ## Potential Roadblocks
 
