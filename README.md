@@ -26,7 +26,7 @@ Also, why on earth was *[The Macarena](https://www.youtube.com/watch?v=anzzNp8Hl
 
 
 # Analysis methods
-\<img src="images/workflow.png" height=80%, width=80%, alt=“Project_Pipeline”\>
+<img src="images/workflow.png" height=80%, width=80%, alt=“Project_Pipeline”\>
 
 # Predicting malware events
 # Future improvements
