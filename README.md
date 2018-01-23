@@ -1,6 +1,9 @@
 # What Exactly Are We Turning Down for Again?
+
 __Abstract:__ This project is an analysis of happiness in music and the external factors that drive it. 
+
 __Hypothesis:__ Music is a representation of our mood. Therefore when the national mood is high, people listen to happy music.
+
 __Results:__ Using logistic regression, I discovered a negative relationship between the consumer confidence index and when the No. 1 billboard hit is a happy song. I found that people are especially likely to listen to happy music following a national tragedy.
 
 See this work as a presentation in [slide format](https://github.com/akraemer007/what_exactly_are_we_turning_down_for_again/blob/master/what_are_we_presentation.pdf).
@@ -16,10 +19,10 @@ Also, why on earth was *[The Macarena](https://www.youtube.com/watch?v=anzzNp8Hl
 
 | Source                                                                                                    | Description                               | Format                                                                        |
 |-----------------------------------------------------------------------------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------|
-| [Billboard](#)(https://github.com/dbfowler/billboard_volatility/blob/master/Raw%20Data/all_charts.csv)       | Billboard Top 100 List going back to 1958 | CSV                                                                           |
-| [Consumer Confidence Index](#)(https://data.oecd.org/leadind/consumer-confidence-index-cci.htm)              | Monthly Index value going back to 1960    | CSV                                                                           |
-| [Spotify API](#)(https://developer.spotify.com/web-api/)                                                     | Song valence and energy scores            | [API](#)(https://github.com/charlie86/spotifyr)                                  |
-| [MetroLyrics](#)(www.metrolyrics.com/), [songlyrics](#)(www.songlyrics.com/), [lyricsmode](#)(www.lyricsmode.com/) | Lyrics billboard hits                     | [Scraped](#)(https://github.com/walkerkq/musiclyrics/blob/master/01_songscrape.R)|
+| [Billboard](https://github.com/dbfowler/billboard_volatility/blob/master/Raw%20Data/all_charts.csv)       | Billboard Top 100 List going back to 1958 | CSV                                                                           |
+| [Consumer Confidence Index](https://data.oecd.org/leadind/consumer-confidence-index-cci.htm)  | Monthly Index value going back to 1960    | CSV                                                                           |
+| [Spotify API](https://developer.spotify.com/web-api/)                                                     | Song valence and energy scores            | [API](https://github.com/charlie86/spotifyr)                                  |
+| [MetroLyrics](www.metrolyrics.com/), [songlyrics](www.songlyrics.com/), [lyricsmode](www.lyricsmode.com/) | Lyrics billboard hits                     | [Scraped](https://github.com/walkerkq/musiclyrics/blob/master/01_songscrape.R)|
 
 
 # Analysis methods
