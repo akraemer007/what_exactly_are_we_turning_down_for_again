@@ -15,7 +15,7 @@ Music is part of our daily lives. We listen to it when we work out. We listen to
 
 Also, why on earth was *[The Macarena](https://www.youtube.com/watch?v=anzzNp8HlVQ)* the No. 1 Billboard hit for 14 straight weeks in 1996?
 
-# Data used
+# Data used 
 
 | Source                                                                                                    | Description                               | Format                                                                        |
 |-----------------------------------------------------------------------------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------|
@@ -26,9 +26,35 @@ Also, why on earth was *[The Macarena](https://www.youtube.com/watch?v=anzzNp8Hl
 
 
 # Analysis methods
-\<img src="images/workflow.png" height=80%, width=80%, alt=“Project_Pipeline”\>
 
-# Predicting malware events
+<img src="images/workflow.png" height=80%, width=80%, alt=“Project_Pipeline”\>
+
+Pop songs share many of the same lyrics:
+<img src="images/popular_pop_lyrics.png" height=80%, width=80%, alt=“popular_lyrics”\>
+
+Used Spotify to create a distance metric which represented the musical happienss of a song using *Valence* and *Energy*.
+<img src="images/musical_happiness.png" height=80%, width=80%, alt=“musical_happiness”\>
+
+Used NLP package TextBlob
+<img src="images/lyrical_happiness.png" height=80%, width=80%, alt=“lyrical_happiness”\>
+
+Comined musical and lyrical scores to create an aggregate musical happiness score, which I called the *Happy Index* comprising of
+1. Text Polarity — score measuring how positive a track’s lyrics are
+2. Energy - score measuring intensity of a track
+3. Valence - score measuring how positive / peppy a track sounds
+
+<img src="images/happy_index_formula.png" height=80%, width=80%, alt=“happy_index_formula”\>
+
+
+
+# Predicting No. 1 hits Happiness
+ 
+A Savitzky-Golay filter was applied to the CCI to smooth the curve. Then the gradient of the curve was taken
+<img src="images/cci_smoothing.png” height=80%, width=80%, alt=“cci_smoothing”\>
+
+The gradient was used as the feature to predict whether the No. 1 Billboard hit was a happy or sad song. 
+
+<img src="images/cci_sad_flagged.png” height=80%, width=80%, alt=“cci_sad_flagged”\>
 # Future improvements
 # Acknowledgements
 Thank you to the following data scientists for inspiration for the project.
