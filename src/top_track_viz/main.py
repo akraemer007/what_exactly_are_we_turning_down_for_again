@@ -1,3 +1,5 @@
+# Run with bokeh serve .
+
 import pandas as pd
 import numpy as np
 
@@ -15,7 +17,7 @@ from bokeh.models.ranges import Range1d
 
 
 # import music data
-song_data = pd.read_pickle('../../data/df.pkl')
+song_data = pd.read_pickle('../data/df.pkl')
 song_data = song_data.sort_values('chartDate').groupby('spotifyID').first().reset_index()
 song_data['color'] = np.where(song_data['happy_index'] < .5, 'purple', 'grey')
 song_data['chartDate'] = song_data['chartDate'].apply(lambda x: x.strftime('%Y-%m-%d'))
@@ -23,7 +25,7 @@ song_data['chartDate'] = song_data['chartDate'].apply(lambda x: x.strftime('%Y-%
 # song_data['energy'] = song_data['energy'].apply(lambda x: round(x, 2))
 # song_data['polarity'] = song_data['polarity'].apply(lambda x: round(x, 2))
 
-month_data = pd.read_pickle('../../data/month_df.pkl')
+month_data = pd.read_pickle('../data/month_df.pkl')
 month_data = month_data.reset_index()
 
 
