@@ -112,47 +112,45 @@ allthesongs$Lyrics <- gsub("we are not in a position to display these lyrics
 # 3 create new lyrics csv to continue running the script
 
 
-lyrics_df <- read_csv('data/lyrics_first_pass.csv')
-
-# ID last completed song
-lyrics_df %>% 
-  mutate(idx = 1:n()) %>% 
-  filter(Lyrics != 'not set yet') %>% 
-  tail(1) %>% 
-  pull(idx) -> last_var
-  # first pass 6szyOE3tMWE8jIukMNK8lY ~ 14333
-
-# df of where the last successful lyrics were pulled (likely where script crashed)
-not_pulled_df <- lyrics_df %>% 
-  slice(last_var+1:n()) %>%
-  distinct()
-
-# has_lyrics // filter out anything with no source or bogus lyric holders
-has_lyrics_df <- lyrics_df %>% 
-  filter(!is.na(Source), 
-         !str_detect(Lyrics, 'we do not have the lyrics for'))
-
-# all instances without lyrics (including true negatives) distinctified.
-no_lyrics_w_pos_dups <- lyrics_df %>% 
-  filter(is.na(Source)) %>% 
-  distinct()
-
-# filtering join to remove no_lyrics where there was a positive
-no_lyrics <- no_lyrics_w_pos_dups %>% 
-  anti_join(has_lyrics_df, by = c('Song', 'Artist'))
-  
-# Stack pulled and no lyrics availible. Remove subset of to-be pulled data
-binded <- has_lyrics_df %>% 
-  bind_rows(no_lyrics) %>% 
-  anti_join(not_pulled_df, by = c('Song', 'Artist'))
-
-# reorder to match original & write CSV
-
-allthesongs %>% 
-  inner_join(binded, by = c('Song', 'Artist')) %>% 
-  select(Song, Artist, spotifyID = spotifyID.x, Lyrics = Lyrics.y, Source = Source.y) -> new_lyrics
-
-# new_lyrics %>% count()
-new_lyrics %>%  write_csv('data/lyrics.csv')
-new_lyrics %>%  write_csv('data/working_lyrics2.csv')
-
+# lyrics_df <- read_csv('data/lyrics_first_pass.csv')
+# 
+# # ID last completed song
+# lyrics_df %>% 
+#   mutate(idx = 1:n()) %>% 
+#   filter(Lyrics != 'not set yet') %>% 
+#   tail(1) %>% 
+#   pull(idx) -> last_var
+#   # first pass 6szyOE3tMWE8jIukMNK8lY ~ 14333
+# 
+# # df of where the last successful lyrics were pulled (likely where script crashed)
+# not_pulled_df <- lyrics_df %>% 
+#   slice(last_var+1:n()) %>%
+#   distinct()
+# 
+# # has_lyrics // filter out anything with no source or bogus lyric holders
+# has_lyrics_df <- lyrics_df %>% 
+#   filter(!is.na(Source), 
+#          !str_detect(Lyrics, 'we do not have the lyrics for'))
+# 
+# # all instances without lyrics (including true negatives) distinctified.
+# no_lyrics_w_pos_dups <- lyrics_df %>% 
+#   filter(is.na(Source)) %>% 
+#   distinct()
+# 
+# # filtering join to remove no_lyrics where there was a positive
+# no_lyrics <- no_lyrics_w_pos_dups %>% 
+#   anti_join(has_lyrics_df, by = c('Song', 'Artist'))
+#   
+# # Stack pulled and no lyrics availible. Remove subset of to-be pulled data
+# binded <- has_lyrics_df %>% 
+#   bind_rows(no_lyrics) %>% 
+#   anti_join(not_pulled_df, by = c('Song', 'Artist'))
+# 
+# # reorder to match original & write CSV
+# 
+# allthesongs %>% 
+#   inner_join(binded, by = c('Song', 'Artist')) %>% 
+#   select(Song, Artist, spotifyID = spotifyID.x, Lyrics = Lyrics.y, Source = Source.y) -> new_lyrics
+# 
+# # new_lyrics %>% count()
+# new_lyrics %>%  write_csv('data/lyrics.csv')

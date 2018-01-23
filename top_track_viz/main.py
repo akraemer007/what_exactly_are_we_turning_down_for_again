@@ -10,7 +10,7 @@ from bokeh.io import curdoc
 from bokeh.plotting import figure, show
 from bokeh.models import ColumnDataSource, HoverTool, Div, Span
 from bokeh.models.widgets import Slider, Select, TextInput
-from bokeh.layouts import row, column, layout, widgetbox # added layout not sure differentce
+from bokeh.layouts import row, column, layout, widgetbox # added layout not sure difference
 from bokeh.models.ranges import Range1d
 
 
@@ -74,7 +74,7 @@ hover = HoverTool(tooltips=[
 corr = figure(plot_width=550, plot_height=550,
 #               tools='pan,wheel_zoom,box_select,reset' # use for time series
               tools=[hover],
-              title = 'dope title',
+              title = 'Song Happiness',
               x_range = [0,1], y_range = [0,1])
 
 corr.circle(x = 'x_axis', y = 'y_axis',
