@@ -1,6 +1,6 @@
 # What Exactly Are We Turning Down for Again?
 
-__Abstract:__ This project is an analysis of happiness in music and the external driving factors. 
+__Abstract:__ This is an analysis of happiness in music and the external factors that drive it.
 
 __Hypothesis:__ Music is a representation of our mood. Therefore when the national mood is high, people listen to happy music.
 
@@ -39,21 +39,18 @@ Spotify’s API contains a number calculated of musical qualities of a song. In 
 
 <img src="images/musical_happiness.png" height=80%, width=80%, alt=“musical_happiness”\>
 
-The lyrical happiness of a song was calcualted by using the sentiment of a song’s lyrics. This was done by using the natural language processing Python package *TextBlob*. In this analysis, lyrical happiness is called *Text Polarity*.
+The lyrical happiness of a song was calcualted by using the sentiment of a song’s lyrics. This was done by using the natural language processing Python package [TextBlob](http://textblob.readthedocs.io/en/dev/). In this analysis, lyrical happiness is called *Text Polarity*.
 <img src="images/lyrical_happiness.png" height=80%, width=80%, alt=“lyrical_happiness”\>
 
 Comined musical and lyrical scores to create an aggregate musical happiness score, which I called the *Happy Index*:
 
-<img src="images/happy_index_formula.png" height=40%, width=40%, alt=“happy_index_formula”\>
-
-
+<img src="images/happy_index_formula.png" height=60%, width=60%, alt=“happy_index_formula”\>
 
 # Predicting No. 1 hits Happiness
  
-A Savitzky-Golay filter was applied to the CCI to smooth the curve. Then the gradient of the curve was taken
-<img src="images/cci_smoothing.png” height=80%, width=80%, alt=“cci_smoothing”\>
+A Savitzky-Golay filter was applied to the CCI to smooth the curve then the gradient of the curve was used as a feature for the logistic regression.
 
-The gradient was used as the feature to predict whether the No. 1 Billboard hit was a happy or sad song. 
+<img src="images/cci_smoothing.png” height=80%, width=80%, alt=“cci_smoothing”\>
 
 <img src="images/cci_sad_flagged.png” height=80%, width=80%, alt=“cci_sad_flagged”\>
 
