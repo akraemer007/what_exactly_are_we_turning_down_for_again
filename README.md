@@ -46,6 +46,8 @@ Comined musical and lyrical scores to create an aggregate musical happiness scor
 
 <img src="images/happy_index_formula.png" height=60%, width=60%, alt=“happy_index_formula”\>
 
+<img src="images/happy_index.png" height=60%, width=60%, alt=“happy_index”\>
+
 # Predicting No. 1 hits Happiness
  
 A Savitzky-Golay filter was applied to the CCI to smooth the curve then the gradient of the curve was used as a feature for the logistic regression.
