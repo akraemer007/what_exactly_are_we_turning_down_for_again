@@ -54,13 +54,18 @@ A Savitzky-Golay filter was applied to the CCI to smooth the curve then the grad
 
 <img src="images/cci_smoothing.png" height=60%, width=60%, alt=“cci_smoothing”\>
 
+Below, months with sad No. 1 Billboard hits are represented with purple lines. Dates when national tragedies occured are highlighted below.
+
 <img src="images/cci_sad_flagged.png" height=60%, width=60%, alt=“cci_sad_flagged”\>
 
 My model resulted in an r-squared of .77.
 
 # Future improvements
+
 - Try other economic indicators outside of the CCI
 - Put interactive web-app online
+- Discover why *The Macerena* was so popular
+
 # Acknowledgements
 First of all, thank you to all of the students, instructors, and staff at [Galvanize](https://www.galvanize.com/austin). I learned an incredible amount in three months. Also, thank you to the following data scientists for inspiration for the project.
 
