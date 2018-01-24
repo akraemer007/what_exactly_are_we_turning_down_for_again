@@ -52,9 +52,9 @@ Comined musical and lyrical scores to create an aggregate musical happiness scor
  
 A Savitzky-Golay filter was applied to the CCI to smooth the curve then the gradient of the curve was used as a feature for the logistic regression.
 
-<img src="images/cci_smoothing.png” height=80%, width=80%, alt=“cci_smoothing”\>
+<img src="images/cci_smoothing.png" height=60%, width=60%, alt=“cci_smoothing”\>
 
-<img src="images/cci_sad_flagged.png” height=80%, width=80%, alt=“cci_sad_flagged”\>
+<img src="images/cci_sad_flagged.png" height=60%, width=60%, alt=“cci_sad_flagged”\>
 
 My model resulted in an r-squared of .77.
 
@@ -63,7 +63,8 @@ My model resulted in an r-squared of .77.
 - Put interactive web-app online
 # Acknowledgements
 First of all, thank you to all of the students, instructors, and staff at [Galvanize](https://www.galvanize.com/austin). I learned an incredible amount in three months. Also, thank you to the following data scientists for inspiration for the project.
-[50 Years of Pop Music](http://kaylinwalker.com/50-years-of-pop-music/)
-[Billboard Volatility](http://decibelsanddecimals.com/dbdblog/2017/1/8/billboard-volatility.html)
-[Blue Christmas: A data-driven search for the most depressing Christmas song](https://caitlinhudon.com/2017/12/22/blue-christmas/)
+
+- [50 Years of Pop Music](http://kaylinwalker.com/50-years-of-pop-music/)
+- [Billboard Volatility](http://decibelsanddecimals.com/dbdblog/2017/1/8/billboard-volatility.html)
+- [Blue Christmas: A data-driven search for the most depressing Christmas song](https://caitlinhudon.com/2017/12/22/blue-christmas/)
 
